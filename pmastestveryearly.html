@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lease Form</title>
+    <script>
+        // JavaScript function to calculate total rent including pet fees
+        function calculateTotal() {
+            const rent = parseFloat(document.getElementById("monthlyRent").value) || 0;
+            const petFee = parseFloat(document.getElementById("petFee").value) || 0;
+            const total = rent + petFee;
+            document.getElementById("totalRent").innerText = "Total Rent: $" + total.toFixed(2);
+        }
+
+        // JavaScript function to show/hide fields based on checkbox selection
+        function toggleFields() {
+            const moveOutSection = document.getElementById("moveOutSection");
+            const isChecked = document.getElementById("moveOutCheckbox").checked;
+            moveOutSection.style.display = isChecked ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+    <h2>Lease Form</h2>
+    <!-- Lease Form Fields -->
+    <form>
+        <label for="property">Property Code:</label>
+        <input type="text" id="property" name="property"><br><br>
+
+        <label for="unit">Unit:</label>
+        <input type="text" id="unit" name="unit"><br><br>
+
+        <label for="tenantNames">Tenant Names:</label>
+        <input type="text" id="tenantNames" name="tenantNames"><br><br>
+
+        <label for="monthlyRent">Monthly Rent:</label>
+        <input type="number" id="monthlyRent" name="monthlyRent" step="0.01" oninput="calculateTotal()"><br><br>
+
+        <label for="petFee">Pet Fee (Non-Refundable):</label>
+        <input type="number" id="petFee" name="petFee" step="0.01" oninput="calculateTotal()"><br><br>
+
+        <label for="moveInDate">Move In Date:</label>
+        <input type="date" id="moveInDate" name="moveInDate"><br><br>
+
+        <div id="totalRent">Total Rent: $0.00</div><br>
+
+        <!-- Move Out Section -->
+        <input type="checkbox" id="moveOutCheckbox" name="moveOutCheckbox" onclick="toggleFields()">
+        <label for="moveOutCheckbox">Move Out</label><br><br>
+
+        <div id="moveOutSection" style="display:none;">
+            <label for="moveOutDate">Move Out Date:</label>
+            <input type="date" id="moveOutDate" name="moveOutDate"><br><br>
+
+            <label for="moveOutReason">Reason for Move Out:</label>
+            <textarea id="moveOutReason" name="moveOutReason"></textarea><br><br>
+        </div>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
